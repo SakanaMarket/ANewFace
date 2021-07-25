@@ -14,6 +14,7 @@ public class Read_Function : MonoBehaviour
     [SerializeField] private AudioSource sfx;
     [SerializeField] private AudioClip ding;
     [SerializeField] private AudioClip malfunc;
+    [SerializeField] private InputField i;
     private bool captured;
 
     private void Awake()
@@ -21,13 +22,20 @@ public class Read_Function : MonoBehaviour
         kai = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
         captured = false;
     }
+
+    private void Update()
+    {
+        i.Select();
+        i.ActivateInputField();
+    }
+
     public void SubmitFunction()
     {
         if (captured == false)
         {
             string func = input.text;
 
-            if (Regex.IsMatch(func, "print\\(\"(h|H)ello, (w|W)orld(\\.|\\!)\"\\)"))
+            if (Regex.IsMatch(func, "(p|P)rint\\(\"(h|H)ello,(\\s?)(w|W)orld(\\.|\\!)?\"\\)"))
             {
                 error.SetActive(false);
                 flag.SetActive(true);
